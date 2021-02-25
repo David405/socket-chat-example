@@ -33,7 +33,23 @@ router.get('/all', async (req, res, next) => {
             message: userData
         })
     } catch (err) {
+        return res.status(400).send({
+            success: false,
+            message: err
+        })
+    }
+})
+
+router.get('/:userID/one', async(req, res, next) => {
+    try{
+        const userData = await user.find({userID: req.params.userID})
+
         return res.status(200).send({
+            success: true,
+            message: userData
+        })
+    } catch (err) {
+        return res.status(400).send({
             success: false,
             message: err
         })
